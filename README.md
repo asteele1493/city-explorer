@@ -19,7 +19,7 @@
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
-10-05-2022 7:02pm - 
+10-05-2022 7:02pm -
 
 ## Credit and Collaborations
 
