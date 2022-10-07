@@ -20,9 +20,10 @@ class App extends React.Component {
 
   getLocation = async () => {
     const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
-    console.log('URL:', url);
+    const otherUrl =  `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
+    // console.log('URL:', url);
     //call axios
-    const response = await axios.get(url);
+    const response = await axios.get(url, otherUrl);
     console.log('response object: ', response);
     console.log('response.data[0]: ', response.data[0]);
     this.setState({ location: response.data[0] });
