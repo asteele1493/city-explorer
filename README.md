@@ -19,7 +19,7 @@
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
-10-05-2022 7:02pm -
+10-08-2022 4:09 - App now has fully functioning error code with a non-existing city is inputted.
 
 ## Credit and Collaborations
 
@@ -27,14 +27,14 @@
 
 ## Feature Log
 
-- Name of feature: ________________________________
+- Name of feature: Error code, pair programmed with Manuch
 
-- Estimate of time needed to complete: _____
+- Estimate of time needed to complete: 1 hour
 
-- Start time: _____
+- Start time: 3:30
 
-- Finish time: _____
+- Finish time: 4:00
 
-- Actual time needed to complete: _____
+- Actual time needed to complete: 30 minutes
 
 [Lab 06 Wireframe](./lab-06-wireframe.png)
