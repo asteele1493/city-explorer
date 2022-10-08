@@ -3,7 +3,6 @@ import './App.css';
 import axios from 'axios';
 import CityDisplay from './CityDisplay';
 import { Alert } from 'react-bootstrap';
-// import Alert from 'react-bootstrap/Alert';
 
 class App extends React.Component {
   constructor(props) {
