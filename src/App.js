@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import CityDisplay from './CityDisplay';
 import { Alert } from 'react-bootstrap';
+// import Weather from './Weather';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,10 +11,15 @@ class App extends React.Component {
     this.state = {
       searchQuery: '',
       location: {},
-      lat: '',
-      lon: '',
-      err: 'Error: Unable to Geocode!',
-      apiError: false
+      // lat: '',
+      // lon: '',
+      errLocation: '',
+      errWeather: '',
+      errMovie: '',
+      apiError: false,
+      displayResults: false,
+      weather: [],
+      movies: []
     }
   }
 
@@ -22,27 +28,61 @@ class App extends React.Component {
   }
 
   getLocation = async () => {
+    const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
     try {
-      const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
-      const otherUrl = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
-      // console.log('URL:', url);
-      //call axios
-      const response = await axios.get(url, otherUrl);
-      this.setState({ apiError: false });
-      console.log('response object: ', response);
-      console.log('response.data[0]: ', response.data[0]);
-      this.setState({ location: response.data[0] });
-      this.setState({ lat: response.data[0].lat });
-      this.setState({ lon: response.data[0].lon });
-      console.log('response object : ', response.data[0].lat);
-      console.log('response object : ', response.data[0].lon);
+      const response = await axios.get(url);
+      console.log("Location data: ", response.data);
+      this.setState({
+        location: this.state.location.data[0].display_name,
+        latitude: this.state.location.data[0].lat,
+        longitude: this.state.location.data[0].lon,
+        displayResults: true,
+        apiError: false
+      }, () => {
+        this.getWeather();
+        this.getMovies();
+      });
     } catch (err) {
-      this.setState({ apiError: true });
-      this.setState({location:{}})
-      console.error(this.state.err);
+      this.setState({
+        displayResults: false,
+        apiError: true,
+        errLocation: err.response.status + ': ' + err.response.data
+      });
     }
   }
 
+  getWeather = async () => {
+    const url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.lat}&lon=${this.state.lon}`;
+    try {
+      let response = await axios.get(url);
+      console.log("Weather data: ", response.data);
+      this.setState({ weather: response.data });
+    } catch (err) {
+      this.setState({
+        apiError: true,
+        displayResults: false,
+        weather: [],
+        errWeather: `status ${err.response.status}: ${err.response.statusText}`
+      });
+    }
+  }
+
+  getMovies = async () => {
+    const url = `${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.searchQuery}`;
+    try {
+      let response = await axios.get(url);
+      console.log("Movies data: ", response.data);
+      this.setState({ movies: response.data });
+    } catch (err) {
+      this.setState({
+        apiError: true,
+        displayResults: false,
+        location: {},
+        errMovie: `status ${err.response.status}: ${err.response.statusText}`
+      });
+    }
+
+  }
 
   render() {
     return (
@@ -68,6 +108,9 @@ class App extends React.Component {
           />
 
         }
+        {/* <Weather 
+          weather */}
+
       </div>
 
 
