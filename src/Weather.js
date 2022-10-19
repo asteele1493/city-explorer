@@ -6,15 +6,15 @@ class Weather extends React.Component {
     return (
       <>
         <Row>
-          {this.props.weather.map(forecast => (
+          {this.props.weather.map(day => (
           <>
-          <h3>{this.day.date}</h3>
-          <p>{this.day.description}</p>
+          <h3>{day.datetime}</h3>
+          <p>{day.description}</p>
           <Col>
             <Card>
-                <Card.Title>{this.day.date}</Card.Title>
-                <Card.Text>{this.day.lowTemp}</Card.Text>
-                <Card.Text>{this.day.highTemp}</Card.Text>
+                <Card.Title>{day.datetime}</Card.Title>
+                <Card.Text>{day.low_temp}</Card.Text>
+                <Card.Text>{day.high_temp}</Card.Text>
             </Card>
           </Col>
           </>
