@@ -8,9 +8,9 @@ class Movies extends React.Component {
         {this.props.movies.map(movie => (
             <Toast>
               <Toast.Header>Movies</Toast.Header>
-              <Toast.Body><img src={movie.img_url} alt = {movie.title}/>
+              <Toast.Body><img src={this.props.movies.img_url} alt = {this.props.movies.title}/>
               <Spinner animation="border" size='sm' variant="info" />
-              <p>{this.props.movie.description}</p>
+              <p>{this.props.movies.description}</p>
               </Toast.Body>
             </Toast>
         ))

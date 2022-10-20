@@ -16,10 +16,9 @@ class App extends React.Component {
       lon: '',
       errMessage: '',
       dispErr: false,
-      // dispResults: false,
       display_name: '',
       weather: [],
-      movies: []
+      movies: [],
     }
   }
 
