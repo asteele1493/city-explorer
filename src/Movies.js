@@ -6,16 +6,15 @@ class Movies extends React.Component {
     return (
       <>
         {this.props.movies.map(movie => (
-          <>
-           <Spinner animation="border" size='sm' variant="info" />
             <Toast>
-              <Toast.Header>{this.props.movie.title}</Toast.Header>
-              <Toast.Body><img src={movie.img_url} alt = {movie.title}/>
-              <p>{this.props.movie.description}</p>
+              <Toast.Header>Movies</Toast.Header>
+              <Toast.Body><img src={this.props.movies.img_url} alt = {this.props.movies.title}/>
+              <Spinner animation="border" size='sm' variant="info" />
+              <p>{this.props.movies.description}</p>
               </Toast.Body>
             </Toast>
-          </>
-        ))}
+        ))
+        }
       </>
     )
   }
